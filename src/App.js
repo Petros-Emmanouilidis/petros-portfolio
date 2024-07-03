@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css"
+import { Suspense } from 'react'
+import { Canvas } from '@react-three/fiber'
+import { Environment, OrbitControls } from "@react-three/drei";
 
-function App() {
+
+import { Armchair } from './Armchair'
+
+export default function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+      <Canvas camera={{ fov: 70, position: [0, 2, 20] }}>
+        <Suspense fallback={null}>
 
-export default App;
+          <Armchair/>
+          <Armchair position={[-10, 0 , 0]}/>
+          <Armchair position={[10, 0 , 0]}/>
+
+          <OrbitControls />
+          <Environment preset="sunset" background backgroundBlurriness={1}/>
+        </Suspense>
+      </Canvas>
+    </div>
+  )
+}
